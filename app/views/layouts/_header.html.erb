@@ -4,7 +4,8 @@
         <p style="margin:0;" >
             <%= link_to "Home", users_path %> | 
             <%= link_to "Profile", user_path(current_user) %> |
-            <%= link_to "Friend Requests", friend_request_path(current_user) %> | 
+            <%= link_to "Friend Requests", friend_request_path(current_user) %> |
+            <%= current_user.email%> | 
             <%= link_to "Sign out", destroy_user_session_path, method: :delete %> |
         </p>
         </div>
@@ -14,6 +15,7 @@
                 <%= search_field_tag :search, params[:search], placeholder: "Search user"%>  
                 <%= button_tag "search"%>
             <% end %>
+
         </div>
 
     <% else %>

@@ -1,13 +1,27 @@
 <h1>Friends List</h1>
 
-<table>
-  <% @friends.each_with_index do |friend,i|%>
+<% unless @friends.empty? %>
+  <table>
+    <% @friends.each_with_index do |friend,i|%>
 
-    <tr>
-      <td><%= "#{i+1}. " + friend.name%></td>
-      <td><td>
-      <td><%= link_to "See profile", user_path(id: friend.id) %></td> 
-    </tr>
-  
-  <%end%>
-</table>
+      <tr>
+        <td><%= "#{i+1}. " + friend.name%></td>
+        <td><td>
+        <td><% if @friend_ids.include?(friend.id)%>
+            
+              <%= link_to "See profile", user_path(id: friend.id) %> | 
+              <%= link_to "Unfriend", friendship_path(friend), method: :DELETE %>
+            
+            <% elsif friend.id != current_user.id%>
+              <%= link_to "Add Friend", friend_requests_path(user_id: friend.id), method: :post %>
+
+            <% end %>
+            </td> 
+      </tr>
+    
+    <%end%>
+  </table>
+
+<% else %>
+    <p>You have no friends yet, lets create by adding friends...  </p>
+<%end%>

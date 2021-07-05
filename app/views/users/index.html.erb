@@ -19,12 +19,19 @@
         <td>
           <% if @friend_ids.include?(user.id) %>
             <%= link_to "See profile", user_path(id: user.id) %>
+          
           <% else %>
-            <%#= link_to "Add Friend", friendrequest_path(:friend_id => user), :method => :post %>
+            
+            <% unless @requests.include?(user.id) %>
+              <%= link_to "Add Friend", friend_requests_path(user_id: user.id), method: :post %>
+            <% else %>
+              <%= "Request pending"%>
+            <% end %>
+          
           <% end %>
         </td>
       </tr>
 
     <%end%>
   </tbody>
-</table>
+</table> 

@@ -1,15 +1,21 @@
 <h1>Friend Requests</h1>
 
-<table>
-  <% @requests.each_with_index do |friend,i|%>
+<% unless @requests.empty? %>
+  <table>
+    <% @requests.each_with_index do |friend,i|%>
 
-    <tr>
-      <td><%= "#{i+1}. " + friend.name%></td>
-      <td><td>
-      <td><%= link_to "Accept", "#" %> |
-          <%= link_to "Decline", "#" %> 
-      </td> 
-    </tr>
+      <tr>
+        <td><%= "#{i+1}. " + friend.name%></td>
+        <td><td>
+        <td><%= link_to "Accept", friendships_path(friend_id: friend.id), method: :POST %> |
+            <%= link_to "Decline", friend_request_path(friend), method: :DELETE %> 
+        </td> 
+      </tr>
+    
+    <%end%>
+  </table>
+
+<% else %>
+  <p>You have no pending requests!!</p>
   
-  <%end%>
-</table>
+<% end %>

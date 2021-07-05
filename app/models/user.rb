@@ -14,14 +14,9 @@ class User < ApplicationRecord
     name = (self.firstname.capitalize + " " + self.lastname.capitalize)
   end
 
-  scope :search_user, -> (search) {where("lower(firstname) LIKE :search OR lower(lastname) LIKE :search", search: "%#{search.downcase}%")}
+  scope :search_user, -> (search) {where("lower(firstname) LIKE :search OR lower(lastname) LIKE :search OR lower(username) LIKE :search", search: "%#{search.downcase}%")}
   
-  # self.id #not working
   scope :registered_users, -> (id) {all.where.not(id: id)} 
-
-  # def self.registered_users
-  #   self.where.not(id: self.id)
-  # end
 
   has_many :friendships
   has_many :friends, through: :friendships
