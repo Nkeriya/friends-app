@@ -23,7 +23,7 @@
           <% else %>
             
             <% unless @requests.include?(user.id) %>
-              <%= link_to "Add Friend", friend_requests_path(user_id: user.id), method: :post %>
+              <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: user.id, req_received_id: current_user.id}), method: :post %>
             <% else %>
               <%= "Request pending"%>
             <% end %>

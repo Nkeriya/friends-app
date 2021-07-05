@@ -1,8 +1,8 @@
 class FriendshipsController < ApplicationController
 
   def create
-    friend_id = params[:friend_id]
-    user_id = current_user.id
+    friend_id = params[:friendship][:friend_id]
+    user_id = params[:friendship][:user_id]
 
     @request = FriendRequest.find_by(user_id: friend_id, req_received_id: user_id) 
     if @request.nil?
@@ -10,7 +10,7 @@ class FriendshipsController < ApplicationController
     end
     @request.destroy
 
-    @friend = Friendship.new(friend_id: friend_id, user_id: current_user.id)
+    @friend = Friendship.new(friendship_params)
     if @friend.save
       redirect_to friend_request_path(current_user)
     else
@@ -24,7 +24,6 @@ class FriendshipsController < ApplicationController
     if @friend.nil?
       @friend = Friendship.find_by(friend_id: current_user.id, user_id: params[:id])
     end
-
     @friend.destroy
     redirect_to friendship_path(current_user)
   end
@@ -33,5 +32,10 @@ class FriendshipsController < ApplicationController
     @user = User.find_by(id: params[:id])
     @friends = (@user.friends + @user.inverse_friends)
     @friend_ids = (current_user.friends + current_user.inverse_friends).pluck(:id)
+  end
+
+  private
+  def friendship_params
+    params.require(:friendship).permit(:friend_id, :user_id)
   end
 end

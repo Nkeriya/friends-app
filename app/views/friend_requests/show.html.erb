@@ -7,7 +7,7 @@
       <tr>
         <td><%= "#{i+1}. " + friend.name%></td>
         <td><td>
-        <td><%= link_to "Accept", friendships_path(friend_id: friend.id), method: :POST %> |
+        <td><%= link_to "Accept", friendships_path(friendship: {friend_id: friend.id, user_id:current_user.id}), method: :POST %> |
             <%= link_to "Decline", friend_request_path(friend), method: :DELETE %> 
         </td> 
       </tr>

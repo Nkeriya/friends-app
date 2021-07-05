@@ -1,11 +1,11 @@
 class FriendRequestsController < ApplicationController
   
   def create
-    @request = FriendRequest.new(user_id: params[:user_id], req_received_id: current_user.id) 
+    @request = FriendRequest.new(friend_request_params) 
     if @request.save
       redirect_to users_path(@request)
     else
-      redirect_back(fallback_location: root_path, notice: "something went wrong!!")
+      redirect_back(fallback_location: root_path, notice: "something went!!")
     end
   end
   
@@ -20,9 +20,9 @@ class FriendRequestsController < ApplicationController
     @requests = @user.req_received
   end
 
-  # private
-  # def friend_request_params
-  #   params.require(:friend_request).permit(:user_id, :req_received_id)
-  # end
+  private
+  def friend_request_params
+    params.require(:friend_request).permit(:user_id, :req_received_id)
+  end
 
 end
