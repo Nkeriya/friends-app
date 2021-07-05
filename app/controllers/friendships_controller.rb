@@ -12,7 +12,7 @@ class FriendshipsController < ApplicationController
     end
     @request.destroy
 
-    redirect_to friend_request_path
+    redirect_to friend_request_path(current_user)
   end
   
   def destroy
@@ -23,7 +23,7 @@ class FriendshipsController < ApplicationController
     end
 
     @friend.destroy
-    redirect_to friendship_path
+    redirect_to friendship_path(current_user)
   end
 
   def show

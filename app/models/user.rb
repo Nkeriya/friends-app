@@ -9,6 +9,7 @@ class User < ApplicationRecord
   GENDER = ["Male", "Female", "Other"]
 
   validates :gender, inclusion: GENDER
+  validates :username, :firstname, :lastname, :gender, :birthday, presence: true
   
   def name
     name = (self.firstname.capitalize + " " + self.lastname.capitalize)

@@ -2,13 +2,13 @@ class FriendRequestsController < ApplicationController
   
   def create
     @request = FriendRequest.create(user_id: params[:user_id], req_received_id: current_user.id) 
-    redirect_to users_path
+    redirect_to users_path(@request)
   end
   
   def destroy
     @request = FriendRequest.find_by(req_received_id: params[:id], user_id: current_user.id) 
     @request.destroy
-    redirect_to friend_request_path
+    redirect_to friend_request_path(current_user)
   end
 
   def show
@@ -18,7 +18,7 @@ class FriendRequestsController < ApplicationController
 
   # private
   # def friend_request_params
-  #   params.require(:friend_request).permit(:user_id, :req_received_id)
+  #   params.require(:request).permit(:user_id, :req_received_id)
   # end
 
 end
