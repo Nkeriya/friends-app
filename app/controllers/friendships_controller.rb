@@ -4,15 +4,18 @@ class FriendshipsController < ApplicationController
     friend_id = params[:friend_id]
     user_id = current_user.id
 
-    @friend = Friendship.create(friend_id: friend_id, user_id: current_user.id)
-
     @request = FriendRequest.find_by(user_id: friend_id, req_received_id: user_id) 
     if @request.nil?
       @request = FriendRequest.find_by(user_id: user_id, req_received_id: friend_id) 
     end
     @request.destroy
 
-    redirect_to friend_request_path(current_user)
+    @friend = Friendship.new(friend_id: friend_id, user_id: current_user.id)
+    if @friend.save
+      redirect_to friend_request_path(current_user)
+    else
+      redirect_back(fallback_location: root_path, notice: "something went wrong!!")
+    end
   end
   
   def destroy
@@ -31,5 +34,4 @@ class FriendshipsController < ApplicationController
     @friends = (@user.friends + @user.inverse_friends)
     @friend_ids = (current_user.friends + current_user.inverse_friends).pluck(:id)
   end
-
 end
