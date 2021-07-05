@@ -1,0 +1,86 @@
+<br/><div style="float:left;"> 
+  <h2 style="margin:0;">Edit <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div style="float:left;min-width:450px;">
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, autocomplete: "username" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :firstname %><br />
+        <%= f.text_field :firstname, autocomplete: "firstname" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :lastname %><br />
+        <%= f.text_field :lastname, autocomplete: "lastname" %>
+      </div><br/>
+
+      <div class="field">
+        <%= f.label :birthday %><br />
+        <%= f.date_field :birthday, max: Date.today %>
+      </div><br/>
+
+      <div class="field">
+        <%= f.label :gender %><br />
+        <%= f.select :gender, ["Male", "Female", "Other"], selected: "Male" %>
+      </div><br/>
+
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div><br>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div><br/>
+
+    </div>
+
+
+    <div style="float:right;">
+      
+      <div style="margin-bottom:10px">
+        <%= render "users/profile_pic"%>
+      </div>
+
+      <div>
+        <%= f.label "Update profile image:" %>
+        <%= f.file_field :profile_image%>
+      </div><br/><br/>
+
+      <div class="field">
+        <strong><i>**(we need your current password to confirm your changes)</i></strong><br /><br />
+        <%= f.label :current_password %> <br/>
+        <%= f.password_field :current_password, autocomplete: "current-password" %>
+      </div><br/>
+
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+<div style="float:right;margin:30px 200px 0 0;border: 1px solid black; padding:20px;">
+<h3>Delete Account!!</h3>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+</div>

@@ -1,0 +1,13 @@
+<h1>Friends List</h1>
+
+<table>
+  <% @friends.each_with_index do |friend,i|%>
+
+    <tr>
+      <td><%= "#{i+1}. " + friend.name%></td>
+      <td><td>
+      <td><%= link_to "See profile", user_path(id: friend.id) %></td> 
+    </tr>
+  
+  <%end%>
+</table>

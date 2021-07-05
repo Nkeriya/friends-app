@@ -1,0 +1,30 @@
+<h1>Registered users list</h1>
+
+<table>
+  <thead>
+
+    <tr>
+      <th> Name </th>
+      <th></th>
+    </tr>
+
+  </thead>
+
+  <tbody>
+    <% @users.each_with_index do |user,i|%>
+
+      <tr>
+        <td><%= "#{i+1}. " + user.name%></td>
+        <td></td>
+        <td>
+          <% if @friend_ids.include?(user.id) %>
+            <%= link_to "See profile", user_path(id: user.id) %>
+          <% else %>
+            <%#= link_to "Add Friend", friendrequest_path(:friend_id => user), :method => :post %>
+          <% end %>
+        </td>
+      </tr>
+
+    <%end%>
+  </tbody>
+</table>

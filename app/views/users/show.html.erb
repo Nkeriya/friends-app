@@ -1,0 +1,45 @@
+<div>
+  <% if @user.id == current_user.id%>
+    <h2>Your Profile</h2>
+  <% else %>
+    <h2><%= @user.firstname.capitalize + "'s"%> Profile</h2>
+  <% end %>
+</div>
+
+<div style="margin: 0px 50px 10px 15px;"> 
+  <%= render "users/profile_pic"%>
+</div>
+
+<div>
+  <table>
+    <tr>
+      <td><strong>Username: </strong></td>
+      <td><%= @user.username %></td>
+    </tr>
+    <tr>
+      <td><strong>Name: </strong></td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Email: </strong></td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td><strong>Date of Birtday: </strong></td>
+      <td><%= @user.birthday.strftime("%d-%B-%Y") %></td>
+    </tr>
+    <tr>
+      <td><strong>Gender: </strong></td>
+      <td><%= @user.gender %></td>
+    </tr>
+  </table>
+</div><br/>
+
+<div>
+  <p><%= link_to "Friends list", friendship_path(id: @user.id) %>
+      <% if @user.id == current_user.id %> 
+       | <%= link_to "Edit Profile", edit_user_registration_path %></p>
+      <% end %>
+  </p>
+
+</div>

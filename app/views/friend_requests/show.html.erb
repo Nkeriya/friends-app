@@ -1,0 +1,15 @@
+<h1>Friend Requests</h1>
+
+<table>
+  <% @requests.each_with_index do |friend,i|%>
+
+    <tr>
+      <td><%= "#{i+1}. " + friend.name%></td>
+      <td><td>
+      <td><%= link_to "Accept", "#" %> |
+          <%= link_to "Decline", "#" %> 
+      </td> 
+    </tr>
+  
+  <%end%>
+</table>

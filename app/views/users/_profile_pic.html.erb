@@ -1,0 +1,5 @@
+  <% if @user.profile_image.attached? %>
+    <%= image_tag(@user.profile_image, atl: "profile image", style:"width:150px; height:auto;")%>
+  <% else %>
+    <%= image_tag ("unknown_user.jpg"), atl: "profile image", style:"width:150px; height:auto;"%>
+  <% end %>
