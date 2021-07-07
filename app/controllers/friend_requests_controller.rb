@@ -12,8 +12,12 @@ class FriendRequestsController < ApplicationController
   
   def destroy
     @request = FriendRequest.find_by(req_received_id: params[:id], user_id: current_user.id) 
+    if @request.nil?
+      @request = FriendRequest.find_by(req_received_id: current_user.id, user_id: params[:id]) 
+    end
+
     @request.destroy
-    redirect_to friend_request_path(current_user)
+    redirect_back(fallback_location: root_path)
   end
 
   def show

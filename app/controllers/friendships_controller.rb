@@ -26,7 +26,7 @@ class FriendshipsController < ApplicationController
       @friend = Friendship.find_by(friend_id: current_user.id, user_id: params[:id])
     end
     @friend.destroy
-    redirect_to friendship_path(current_user)
+    redirect_back(fallback_ location:root_path)
   end
 
   def show
