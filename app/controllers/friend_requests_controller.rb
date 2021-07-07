@@ -1,6 +1,6 @@
 class FriendRequestsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     @request = FriendRequest.new(friend_request_params) 
     if @request.save

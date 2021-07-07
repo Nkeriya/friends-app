@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey <%= @receiver.user.name%>, you got a friend request from: <%= @sender_name %>!!</h1>
+    <p>
+      lets check it out who send you request!!.<br>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= link_to "FriendApp", @url %>.
+    </p>
+    <p>Have a great day!</p>
+  </body>
+</html>
