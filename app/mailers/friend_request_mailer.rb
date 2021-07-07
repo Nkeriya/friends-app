@@ -9,7 +9,6 @@ class FriendRequestMailer < ApplicationMailer
     mail(to: @receiver.user.email, subject: "You received a friend request!!") do |format|
       format.html { render 'new_friend_request_email' }
       format.text { render 'new_friend_request_email' }
-      
     end
 
   end

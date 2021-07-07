@@ -8,7 +8,8 @@ class FriendRequest < ApplicationRecord
   after_create :send_mail_on_create_request
 
   def send_mail_on_create_request
-    FriendRequestMailer.new_friend_request_email(self, self.req_received).deliver_later
+    SendNotificationJob.set(wait: 1.minutes).perform_later(self, self.req_received)
+    # FriendRequestMailer.new_friend_request_email(self, self.req_received).deliver_later(wait: 1.minutes)
   end
 
 end
