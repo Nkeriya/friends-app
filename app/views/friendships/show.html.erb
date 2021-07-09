@@ -25,7 +25,7 @@
               <%= link_to "Unfriend", friendship_path(friend), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;" %>
             
             <% elsif friend.id != current_user.id%>
-              <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: friend.id, req_received_id: current_user.id}), method: :post %>
+              <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: friend.id, req_received_id: current_user.id}), method: :post, class:"btn btn-outline-dark btn-sm"  %>
             
             <% end %>
         </td> 

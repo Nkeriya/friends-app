@@ -20,8 +20,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-    @requests = @user.req_received
+    @requests = current_user.req_received
   end
 
   private

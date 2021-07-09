@@ -1,16 +1,7 @@
 class FriendshipsController < ApplicationController
   
-  def create
-    friend_id = params[:friendship][:friend_id]
-    user_id = params[:friendship][:user_id]
-
-    @request = FriendRequest.find_by(user_id: friend_id, req_received_id: user_id) 
-    if @request.nil?
-      @request = FriendRequest.find_by(user_id: user_id, req_received_id: friend_id) 
-    end
-    @request.destroy
-
-    @friend = Friendship.new(friendship_params)
+  def create                           
+    @friend = Friendship.new(friendship_params)  # friend_id = params[:friendship][:friend_id]
     if @friend.save
       redirect_to friend_request_path(current_user)
     else
@@ -20,10 +11,10 @@ class FriendshipsController < ApplicationController
   
   def destroy
     @friend = Friendship.find_by(friend_id: params[:id], user_id: current_user.id)
-
     if @friend.nil?
       @friend = Friendship.find_by(friend_id: current_user.id, user_id: params[:id])
     end
+
     @friend.destroy
     redirect_back(fallback_location: root_path)
   end

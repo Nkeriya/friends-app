@@ -10,13 +10,9 @@ Rails.application.routes.draw do
   resources :friendships, only: [:show, :create, :destroy]
   resources :friend_requests, only: [:show, :create, :destroy]
 
-
   require 'sidekiq/web'
-# or require 'sidekiq/pro/web'
-# or require 'sidekiq-ent/web'
-
   MyApp::Application.routes.draw do
-    mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
+    mount Sidekiq::Web => "/sidekiq"  # mount Sidekiq::Web in your Rails app
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

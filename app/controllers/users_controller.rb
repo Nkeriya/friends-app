@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_id, only: [:show, :friendlist]
-
   def index
     @users = User.registered_users(current_user.id)
-
     @friend_ids = (current_user.friends + current_user.inverse_friends).pluck(:id)
-
     @requests = FriendRequest.where(req_received_id: current_user.id).pluck(:user_id)
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def search
@@ -19,10 +16,5 @@ class UsersController < ApplicationController
     else
       @results = User.search_user(@search)
     end
-  end
-
-  private
-  def set_id
-    @user = User.find(params[:id])
   end
 end
