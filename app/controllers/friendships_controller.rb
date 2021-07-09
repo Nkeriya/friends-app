@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-  before_action :authenticate_user!
   
   def create
     friend_id = params[:friendship][:friend_id]
@@ -26,7 +25,7 @@ class FriendshipsController < ApplicationController
       @friend = Friendship.find_by(friend_id: current_user.id, user_id: params[:id])
     end
     @friend.destroy
-    redirect_back(fallback_ location:root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   def show

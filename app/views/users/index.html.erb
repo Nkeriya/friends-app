@@ -1,11 +1,13 @@
 <h1>Registered users list</h1>
 
-<table>
-  <thead>
+<table class="table table-hover" style="text-align:center;">
+  <thead class="thead-light">
 
     <tr>
-      <th> Name </th>
-      <th></th>
+      <th scope="col">#</th>
+      <th scope="col"> Username </th>
+      <th scope="col"> Name </th>
+      <th scope="col"></th>
     </tr>
 
   </thead>
@@ -14,19 +16,20 @@
     <% @users.each_with_index do |user,i|%>
 
       <tr>
-        <td><%= "#{i+1}. " + user.name%></td>
-        <td></td>
-        <td>
+        <td ><%= "#{i+1}"%></td>
+        <td ><%= user.username%></td>
+        <td ><%= user.name%></td>
+        <td >
           <% if @friend_ids.include?(user.id) %>
-            <%= link_to "See profile", user_path(id: user.id) %> | 
-            <%= link_to "Unfriend", friendship_path(user), method: :DELETE %>
+            <%= link_to "See profile", user_path(id: user.id), class:"btn btn-outline-dark btn-sm", style:"color:green;" %> | 
+            <%= link_to "Unfriend", friendship_path(user), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;" %>
           
           <% else %>
             
             <% unless @requests.include?(user.id) %>
-              <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: user.id, req_received_id: current_user.id}), method: :post %>
+              <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: user.id, req_received_id: current_user.id}), method: :post, class:"btn btn-outline-dark btn-sm" %>
             <% else %>
-              <%= link_to "Cancel Request", friend_request_path(user), method: :DELETE %>
+              <%= link_to "Cancel Request", friend_request_path(user), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;" %>
             <% end %>
           
           <% end %>
@@ -35,4 +38,4 @@
 
     <%end%>
   </tbody>
-</table> 
+</table>

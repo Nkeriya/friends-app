@@ -1,8 +1,14 @@
 <h3>Search Results</h3>  
 
 <% unless @results.empty? %>
-    <% @results.each do |result| %>  
-        <%= result.name %><br>  
+    <% @results.each do |result| %>
+
+        <table>
+            <tbody>
+            <tr> <td style="margin:0;padding: 5px 20px;"> <%= result.name %></td> <tr>
+            </tbody>
+        </table>
+    
     <% end %>
 
 <% else %>

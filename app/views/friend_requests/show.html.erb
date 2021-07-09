@@ -1,14 +1,26 @@
 <h1>Friend Requests</h1>
 
 <% unless @requests.empty? %>
-  <table>
+  <table class="table" style="text-align:center;" >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    
     <% @requests.each_with_index do |friend,i|%>
 
       <tr>
-        <td><%= "#{i+1}. " + friend.name%></td>
-        <td><td>
-        <td><%= link_to "Accept", friendships_path(friendship: {friend_id: friend.id, user_id:current_user.id}), method: :POST %> |
-            <%= link_to "Decline", friend_request_path(friend), method: :DELETE %> 
+        <td><%= "#{i+1}"%></td>
+        <td><%= friend.username%></td>
+        <td><%= friend.name%></td>
+
+        <td><%= link_to "Accept", friendships_path(friendship: {friend_id: friend.id, user_id:current_user.id}), method: :POST, class:"btn btn-outline-dark btn-sm", style:"color:green;" %> |
+            <%= link_to "Decline", friend_request_path(friend), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;"  %> 
         </td> 
       </tr>
     

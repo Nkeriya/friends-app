@@ -1,24 +1,38 @@
 <h1>Friends List</h1>
 
 <% unless @friends.empty? %>
-  <table>
+  <table class="table" style="text-align:center;" >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
     <% @friends.each_with_index do |friend,i|%>
 
       <tr>
-        <td><%= "#{i+1}. " + friend.name%></td>
-        <td><td>
-        <td><% if @friend_ids.include?(friend.id)%>
-            
-              <%= link_to "See profile", user_path(id: friend.id) %> | 
-              <%= link_to "Unfriend", friendship_path(friend), method: :DELETE %>
+        <td><%= "#{i+1}" %></td>
+        <td><%= friend.username %></td>
+        <td><%= friend.name%></td>
+        <td><%= friend.email%></td>
+        <td>
+            <% if @friend_ids.include?(friend.id)%>
+              <%= link_to "See profile", user_path(id: friend.id), class:"btn btn-outline-dark btn-sm", style:"color:green;" %> | 
+              <%= link_to "Unfriend", friendship_path(friend), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;" %>
             
             <% elsif friend.id != current_user.id%>
               <%= link_to "Add Friend", friend_requests_path(friend_request: {user_id: friend.id, req_received_id: current_user.id}), method: :post %>
+            
             <% end %>
-            </td> 
+        </td> 
       </tr>
     
     <%end%>
+    </tbody>
   </table>
 
 <% else %>
