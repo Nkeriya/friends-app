@@ -6,9 +6,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.post_id = params[:post_id]
     if @comment.save
-      redirect_to posts_path, notice: "Comment added successfully!!"
+      redirect_back(fallback_location: root_path, notice: "Comment added successfully!!")
     else
-      redirect_back(posts_path, notice: "Something goes worng!!")
+      redirect_back(fallback_location: root_path, notice: "Something goes worng!!")
     end
   end
 
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to posts_path, notice: "Comment deleted succesfully!!"
+    redirect_back(fallback_location: root_path, notice: "Comment deleted succesfully!!")
   end
 
   private

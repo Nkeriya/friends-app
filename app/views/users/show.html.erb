@@ -38,7 +38,8 @@
     <br/>
 
     <div>
-      <p><%= link_to "Friends list", friendship_path(id: @user.id), class:"btn btn-outline-dark btn-sm"%>
+      <p><%= link_to "Friends list", friendship_path(id: @user.id), class:"btn btn-outline-dark btn-sm"%> | 
+          <%= link_to "Posts", post_path(id: @user.id), class:"btn btn-outline-dark btn-sm"%>
           <% if @user.id == current_user.id%> 
           | <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-dark btn-sm"  %>
           <% end %>

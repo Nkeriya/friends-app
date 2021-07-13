@@ -1,4 +1,6 @@
 class User < ApplicationRecord  
+  include UserMethods
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,7 +19,8 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
-  # has_many :likes
+  has_many :post_likes
+  has_many :comment_likes 
 
   GENDER = ["Male", "Female", "Other"]
   validates :gender, inclusion: GENDER
@@ -26,13 +29,5 @@ class User < ApplicationRecord
 
   scope :search_user, -> (search) {where("lower(firstname) LIKE :search OR lower(lastname) LIKE :search OR lower(username) LIKE :search", search: "%#{search.downcase}%")}
   scope :registered_users, -> (id) {all.where.not(id: id)} 
-
-  def name
-    name = (self.firstname.capitalize + " " + self.lastname.capitalize)
-  end
-
-  def friend_ids
-    (self.friends + self.inverse_friends).pluck(:id)
-  end
 
 end

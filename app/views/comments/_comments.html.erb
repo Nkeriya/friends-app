@@ -1,10 +1,14 @@
-<% post.comments.each do |comment|%>
+<% post.comments.reverse.each do |comment|%>
 <%next unless comment.id %>
   <p style="margin-bottom:0;">
     [<%= time_ago_in_words(comment.created_at)%>]
-    <%= comment.user.name %>: <%= comment.body %>
+    <strong><%= comment.user.name %></strong>: <%= comment.body %>
 
-    <%= link_to "Like", "#"%> 
+    <% if current_user.comment_liked?(comment.id)%>
+      <%= link_to "Unlike", comment_like_path(id: current_user.comment_liked?(comment.id)[1]), method: :DELETE%>
+    <% else %>
+      <%= link_to "Like", comment_likes_path(comment_like: {user_id: current_user.id, comment_id: comment.id}), method: :post%>
+    <% end %>
 
     <% if comment.user == current_user%>
       | <%= link_to("Edit", edit_post_comment_path(id: comment.id, post_id: comment.post_id))%> | 

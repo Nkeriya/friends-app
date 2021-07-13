@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   root 'home#index'
 
   devise_for :users, controllers: {registrations: :registrations }
@@ -14,9 +13,14 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
+  resources :post_likes, only: [:create, :destroy]
+  resources :comment_likes, only: [:create, :destroy]
+  get '/posts/:id/edit/delete/:image_id' => 'posts#delete_attachment', :as => 'delete_image'
 
   require 'sidekiq/web'
   MyApp::Application.routes.draw do
+  # get 'post_likes/create'
+  # get 'post_likes/destroy'
   # get 'posts/index'
   # get 'posts/show'
   # get 'posts/edit'

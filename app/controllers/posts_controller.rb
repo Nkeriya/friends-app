@@ -12,11 +12,15 @@ class PostsController < ApplicationController
     @posts = Post.posts_for_current_user(@user.id)
   end
 
-  # def edit
-  # end
+  def edit
+    @post =  Post.find(params[:id])
+  end
 
-  # def update
-  # end
+  def update
+    @post =  Post.find(params[:id])
+    @post.update(posts_params)
+    redirect_to posts_path, notice: "Post updated successfully!!"
+  end
 
   def create
     @post = Post.new(posts_params)
@@ -32,6 +36,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path, notice: "Post has been deleted successfully"
+  end
+
+  def delete_attachment
+    @post = Post.find(params[:id])
+    @post.post_images[params[:image_id].to_i].purge
+    redirect_back(fallback_location: root_path)
   end
 
   private

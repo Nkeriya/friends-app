@@ -1,2 +1,20 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Edit Posts</h1>
+
+<%= form_for @post do |f|%>
+
+  <%= f.text_area :text, rows: 2, style: 'width:100%;padding-top:5px;'%><br />
+
+  <%=f.file_field :post_images, multiple: true, style:"padding:0;", class:"btn btn-outline-dark btn-sm"%>
+
+  <%= f.submit style:"float:right;", class:"btn btn-outline-dark btn-sm"%>
+
+<% end %><br/>
+
+<% image_id = 0%>
+<%@post.post_images.each do |image|%>
+
+  <%= image_tag(image, style:"width:300px;height:300px;padding:4px 2px;")%>
+  <%= link_to "Delete", delete_image_path(id: @post.id, image_id: image_id), class:"btn btn-outline-dark btn-sm", style:"vertical-align: top;"%>
+  <% image_id += 1 %>
+
+<%end%>
