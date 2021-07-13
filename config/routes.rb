@@ -10,8 +10,16 @@ Rails.application.routes.draw do
   resources :friendships, only: [:show, :create, :destroy]
   resources :friend_requests, only: [:show, :create, :destroy]
 
+  resources :posts do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end
+
+
   require 'sidekiq/web'
   MyApp::Application.routes.draw do
+  # get 'posts/index'
+  # get 'posts/show'
+  # get 'posts/edit'
     mount Sidekiq::Web => "/sidekiq"  # mount Sidekiq::Web in your Rails app
   end
 

@@ -20,7 +20,7 @@
         <td ><%= user.username%></td>
         <td ><%= user.name%></td>
         <td >
-          <% if @friend_ids.include?(user.id) %>
+          <% if current_user.friend_ids.include?(user.id) %>
             <%= link_to "See profile", user_path(id: user.id), class:"btn btn-outline-dark btn-sm", style:"color:green;" %> | 
             <%= link_to "Unfriend", friendship_path(user), method: :DELETE, class:"btn btn-outline-dark btn-sm", style:"color:red;" %>
           

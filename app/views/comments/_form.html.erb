@@ -1,0 +1,4 @@
+<%= form_for [post, post.comments.build] do |f| %>
+<%= f.text_field :body, style:"width:50%;"%>
+<%= f.submit "Comment" ,class:"btn btn-outline-dark btn-sm" %>
+<% end %>

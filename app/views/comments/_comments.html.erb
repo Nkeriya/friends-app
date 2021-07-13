@@ -1,0 +1,15 @@
+<% post.comments.each do |comment|%>
+<%next unless comment.id %>
+  <p style="margin-bottom:0;">
+    [<%= time_ago_in_words(comment.created_at)%>]
+    <%= comment.user.name %>: <%= comment.body %>
+
+    <%= link_to "Like", "#"%> 
+
+    <% if comment.user == current_user%>
+      | <%= link_to("Edit", edit_post_comment_path(id: comment.id, post_id: comment.post_id))%> | 
+      <%= link_to "Delete", post_comment_path(comment.post, comment), method: :DELETE %> 
+    <% end %>
+  
+  </p>
+<% end %>

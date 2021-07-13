@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col-12" style="padding:5px 15px;">
+      <div>
+        <%= render "posts/form"%>
+      </div><br/>
+
+      <div>
+        <%= render partial: "posts/posts", locals: {posts: @posts} %>
+      </div>
+
+    </div>
+
+    <div class="col"></div>
+  </div>
+</div><br/><br/>

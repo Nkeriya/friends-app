@@ -1,0 +1,40 @@
+<% posts.each do |post|%><hr/>
+
+
+<div class="row">
+  <div class="col">
+    <%= post.user.name + " [" + time_ago_in_words(post.created_at) + " ago]"%>
+  </div>
+  
+  <div class="col-2">
+    <p style="text-align:right;margin:0;">
+      <% if post.user == current_user%>
+      <%= link_to "Edit", "#", class:"btn btn-outline-dark btn-sm"%> | 
+      <%= link_to "Delete", post_path(post), method: :DELETE, class:"btn btn-outline-dark btn-sm" %>
+      <% end %> </p>
+  </div>
+</div>
+
+  <div style="overflow:visible;">
+   <%= post.text%>
+  </div>
+
+  <div>
+    <%post.post_images.each do |image|%>
+      <%= image_tag(image, style:"width:300px;height:300px;padding:4px 2px;")%>
+    <%end%>
+
+    <div>
+      <% unless post.user == current_user %>
+        <%= link_to "Like", "#"%> | <%= link_to "Share", "#"%>
+      <% end %> 
+    </div>
+
+    <div style="margin-top:20px";>
+      <%= render partial: "comments/form", locals: {post: post}%>
+      <%= render partial: "comments/comments", locals: {post: post}%>
+    </div>
+
+  </div>
+
+<%end%>

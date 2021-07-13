@@ -22,7 +22,6 @@ class FriendshipsController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @friends = (@user.friends + @user.inverse_friends)
-    @friend_ids = (current_user.friends + current_user.inverse_friends).pluck(:id)
   end
 
   private
