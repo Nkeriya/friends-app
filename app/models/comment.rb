@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include CommentMethods
+
   belongs_to :user
   belongs_to :post
 
@@ -6,5 +8,4 @@ class Comment < ApplicationRecord
   has_many :comment_likes 
 
   validates :body, presence: true
-
 end

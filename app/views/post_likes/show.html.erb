@@ -1,0 +1,16 @@
+<%= link_to "Back", :back, class:"btn btn-outline-dark btn-sm"%><br/><br/>
+
+<h1>People's who likes this post</h1>
+
+<% if @count == 0 %>
+  <p>No one likes this post yet!!</p>
+
+<% else %>
+  
+  <table>
+  <% @post_likes.each do |post_like| %>
+    <tr><td><%= post_like.user.name %></td></tr>
+  <% end %>
+  </table>
+
+<% end %>

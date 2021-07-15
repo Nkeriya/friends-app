@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
-  resources :post_likes, only: [:create, :destroy]
-  resources :comment_likes, only: [:create, :destroy]
+  resources :post_likes, only: [:show, :create, :destroy]
+  resources :comment_likes, only: [:show, :create, :destroy]
   get '/posts/:id/edit/delete/:image_id' => 'posts#delete_attachment', :as => 'delete_image'
 
   require 'sidekiq/web'

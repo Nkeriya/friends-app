@@ -1,9 +1,7 @@
-<% unless post.user == current_user %>
-  <% if current_user.post_liked?(post.id)%>
-    <%= link_to "Unlike", post_like_path(id: current_user.post_liked?(post.id)[1]), method: :DELETE%>
-  <% else %>
-    <%= link_to "Like", post_likes_path(post_like: {user_id: current_user.id, post_id: post.id}), method: :post%>
-  <% end %>
+<% if current_user.post_liked?(post.id)%>
+  <%= link_to "Unlike", post_like_path(id: current_user.post_liked?(post.id)[1]), method: :DELETE%>
+<% else %>
+  <%= link_to "Like", post_likes_path(post_like: {user_id: current_user.id, post_id: post.id}), method: :post%>
+<% end %><%= link_to "#{post.like_count[0]}", post_like_path(id: post.id)%>
 
-  | <%= link_to "Share", "#"%>
-<% end %> 
+| <%= link_to "Share", "#"%>

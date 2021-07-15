@@ -1,5 +1,11 @@
 class PostLikesController < ApplicationController
 
+  def show
+    @post = Post.find(params[:id])
+    @count = @post.like_count[0]
+    @post_likes = @post.like_count[1]
+  end
+
   def create
     @like = PostLike.new(post_likes_params)
     if @like.save

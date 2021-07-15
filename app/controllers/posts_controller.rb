@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_post_id, only: [:edit, :update, :destroy, :delete_attachment]
 
   def index
     arr = current_user.friend_ids
@@ -13,12 +14,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post =  Post.find(params[:id])
   end
 
   def update
-    @post =  Post.find(params[:id])
-    @post.update(posts_params)
+     @post.update(posts_params)
     redirect_to posts_path, notice: "Post updated successfully!!"
   end
 
@@ -28,18 +27,16 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: "Post has been created successfully"
     else
-      render :index
+      redirect_back(fallback_location: root_path, notice: @post.errors.full_messages[0])
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path, notice: "Post has been deleted successfully"
   end
 
   def delete_attachment
-    @post = Post.find(params[:id])
     @post.post_images[params[:image_id].to_i].purge
     redirect_back(fallback_location: root_path)
   end
@@ -52,6 +49,10 @@ class PostsController < ApplicationController
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to posts_path, notice: "You are not authorized to perform this action!!" if @post.nil?
+  end
+
+  def set_post_id
+    @post =  Post.find(params[:id])
   end
 
 end

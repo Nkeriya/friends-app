@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_post
+  before_action :set_comment_id, only: [:edit, :update, :destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -8,28 +9,24 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_back(fallback_location: root_path, notice: "Comment added successfully!!")
     else
-      redirect_back(fallback_location: root_path, notice: "Something goes worng!!")
+      redirect_back(fallback_location: root_path, notice: @comment.errors.full_messages)
     end
   end
 
   def edit
-    @comment = @post.comments.find(params[:id])
   end
 
   def update
-    @comment = @post.comments.find(params[:id])
     @comment.update(comment_params)
     redirect_to posts_path, notice: "Comment updated succesfully!!"
   end
 
   def destroy
-    @comment = @post.comments.find(params[:id])
     @comment.destroy
     redirect_back(fallback_location: root_path, notice: "Comment deleted succesfully!!")
   end
 
   private
-
   def comment_params
     params.require(:comment).permit(:body, :post_id)
   end
@@ -38,4 +35,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
+  def set_comment_id
+    @comment = @post.comments.find(params[:id])
+  end
 end

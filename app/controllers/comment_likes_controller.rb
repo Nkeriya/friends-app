@@ -1,5 +1,11 @@
 class CommentLikesController < ApplicationController
 
+  def show
+    @comment = Comment.find(params[:id])
+    @count = @comment.like_count[0]
+    @comment_likes = @comment.like_count[1]
+  end
+
   def create
     @like = CommentLike.new(comment_likes_params)
     if @like.save

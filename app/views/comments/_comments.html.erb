@@ -9,9 +9,10 @@
     <% else %>
       <%= link_to "Like", comment_likes_path(comment_like: {user_id: current_user.id, comment_id: comment.id}), method: :post%>
     <% end %>
+    <%= link_to "#{comment.like_count[0]}", comment_like_path(comment)%>
 
     <% if comment.user == current_user%>
-      | <%= link_to("Edit", edit_post_comment_path(id: comment.id, post_id: comment.post_id))%> | 
+      | <%= link_to "Edit", edit_post_comment_path(id: comment.id, post_id: comment.post_id)%> | 
       <%= link_to "Delete", post_comment_path(comment.post, comment), method: :DELETE %> 
     <% end %>
   
