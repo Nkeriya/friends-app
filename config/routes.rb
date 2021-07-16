@@ -18,14 +18,15 @@ Rails.application.routes.draw do
   get '/posts/:id/edit/delete/:image_id' => 'posts#delete_attachment', :as => 'delete_image'
 
   require 'sidekiq/web'
-  MyApp::Application.routes.draw do
-  # get 'post_likes/create'
-  # get 'post_likes/destroy'
-  # get 'posts/index'
-  # get 'posts/show'
-  # get 'posts/edit'
-    mount Sidekiq::Web => "/sidekiq"  # mount Sidekiq::Web in your Rails app
-  end
+  mount Sidekiq::Web => "/sidekiq"  # mount Sidekiq::Web in your Rails app
+
+  # MyApp::Application.routes.draw do
+  # # get 'post_likes/create'
+  # # get 'post_likes/destroy'
+  # # get 'posts/index'
+  # # get 'posts/show'
+  # # get 'posts/edit'
+  # end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

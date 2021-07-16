@@ -15,15 +15,15 @@ class Post < ApplicationRecord
   private
   def post_content
     if !(post_images.attached?) && (text.blank?)
-      errors.add(:body, "body cant be blank")
+      errors.add(:post, "can't be blank")
     end
   end
 
   def post_images_type
     if post_images.attached? 
       post_images.each do |image|
-        unless image.content_type.in?(%("image/jpg" "image/png"))
-          errors.add(:post_images, "Only JPEG or PNG files are allowed!!")
+        unless image.content_type.in?(%("image/jpg" "image/jpeg" "image/png"))
+          errors.add(:post_images, "only JPEG or PNG files are allowed!!")
         end
       end
     end
