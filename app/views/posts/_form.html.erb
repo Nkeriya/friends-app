@@ -1,9 +1,20 @@
-<%= form_for :post do |f|%>
+<div class="form-group">
+  <%= form_for :post do |f|%>
+    <div class="row">
+      <div class="col-12">
+        <%= f.text_area :text, rows: 2, class:"form-control"%><br />
+      </div>
+    </div>
+    
+  <div class="row">
+    <div class="col-12 col-md-10 mb-2">
+      <%=f.file_field :post_images, multiple: true, class:"btn btn-outline-dark btn-sm"%>
+    </div>
+  
+    <div class="col-12 col-md-2">
+      <%= f.submit "Create Post", class:" form-control btn btn-outline-dark btn-sm"%>
+    </div>
+  </div>
 
-  <%= f.text_area :text, rows: 2, style: 'width:100%;padding-top:5px;'%><br />
-
-  <%=f.file_field :post_images, multiple: true, style:"padding:0;", class:"btn btn-outline-dark btn-sm"%>
-
-  <%= f.submit "Create Post", style:"float:right;", class:"btn btn-outline-dark btn-sm"%>
-
-<% end %>
+  <% end %>
+</div>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.registered_users(current_user.id)
-    @requests = FriendRequest.where(req_received_id: current_user.id).pluck(:user_id)
+    @requests = current_user.requests_ids(current_user)
   end
 
   def show

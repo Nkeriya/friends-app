@@ -1,58 +1,67 @@
-<h2 style="text-align:center;margin-bottom:20px;">Sign up</h2>
+<h2 class="text-center">Sign up</h2><br/>
 
+<div class="d-flex justify-content-center">
+  <div class="col col-md-5" >
+    <div class="form-group">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-<div class="form-group" style="max-width:40%;margin:auto;">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.text_field :firstname, autocomplete: "firstname",class:"form-control form-control-sm", placeholder:"First-name" %>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.text_field :lastname, autocomplete: "lastname", class:"form-control form-control-sm", placeholder:"Last-name" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+        <%= f.text_field :username, autocomplete: "username", class:"form-control form-control-sm", placeholder:"Username"  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-sm", placeholder:"jhon@123.com"%>
+        </div>
+      </div>
 
-  <div class="row" style="margin-bottom:10px;">
-    <div class="col">
-      <%= f.text_field :firstname, autocomplete: "firstname",class:"form-control form-control-sm", placeholder:"First-name" %>
-    </div>
-    <div class="col">
-      <%= f.text_field :lastname, autocomplete: "lastname", class:"form-control form-control-sm", placeholder:"Last-name" %>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.label :birthday %>
+          <%= f.date_field :birthday, max: Date.today, class:"form-control form-control-sm" %>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.label :gender %>
+          <%= f.select :gender , options_for_select(User::GENDER, selected: "Male"), {}, {class:"custom-select custom-select-sm"}%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.password_field :password, autocomplete: "new-password", class:"form-control form-control-sm", placeholder:"Password" %>
+          <small id="passwordHelpBlock" class="form-text text-muted">
+            Your password must be
+            <% if @minimum_password_length %>
+            <%= @minimum_password_length %>
+            <% else %>
+            6-20
+            <% end %>
+            characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control form-control-sm", placeholder:"Password Confirmation" %>
+        </div>
+      </div><br />
 
-  <div class="field" style="margin-bottom:10px;">
-    <%= f.text_field :username, autocomplete: "username", class:"form-control form-control-sm", placeholder:"Username"  %>
-  </div>
-
-  <div class="field" style="margin-bottom:10px;">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-sm", placeholder:"jhon@123.com"%>
-  </div>
-
-  <div class="row" style="margin-bottom:10px;">
-    <div class="col">
-      <%= f.label :birthday %>
-      <%= f.date_field :birthday, max: Date.today, class:"form-control form-control-sm" %>
-    </div>
-    <div class="col">
-      <%= f.label :gender %>
-      <%= f.select :gender , options_for_select(User::GENDER, selected: "Male"), {}, {class:"custom-select custom-select-sm"}%>
-    </div>
-  </div>
-
-  <div class="field" style="margin-bottom:10px;">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "new-password", class:"form-control form-control-sm", placeholder:"Password" %>
-    <small id="passwordHelpBlock" class="form-text text-muted">
-      Your password must be
-      <% if @minimum_password_length %>
-      <%= @minimum_password_length %>
-      <% else %>
-      6-20
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.submit "Sign up",class:"btn btn-outline-dark btn-block", style:"margin-botton:50px;"  %>
+        </div>
+      </div>
+      
       <% end %>
-      characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+
+    </div>
   </div>
-
-  <div class="field" style="margin-bottom:10px;">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control form-control-sm", placeholder:"Password Confirmation" %>
-  </div><br />
-
-  <div class="actions">
-    <%= f.submit "Sign up",class:"btn btn-outline-dark btn-block", style:"margin-botton:50px;"  %>
-  </div>
-  <% end %>
-
 </div>

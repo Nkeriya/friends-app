@@ -1,4 +1,40 @@
 <%= form_for [post, post.comments.build] do |f| %>
-<%= f.text_field :body, style:"width:50%;"%>
-<%= f.submit "Comment" ,class:"btn btn-outline-dark btn-sm" %>
+<%= f.text_field :body, style:"width:85%;"%>
+<div id="Comment_btn_id", style="float:right;">
+<%= f.submit "Comment" ,class:"btn btn-outline-dark btn-sm"%>
+</div>
 <% end %>
+
+<!--
+<script type="text/javascript">
+$('form').submit(function() {  
+    var valuesToSubmit = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url:    "/posts"            //"$(this).attr('action')", //sumbits it to the given url of the form
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+    })
+    return false; // prevents normal behaviour
+});
+</script>
+
+
+
+<script type="text/javascript">
+    $('#Comment_btn_id').click(function(){
+       $.ajax({
+
+        url: "/comments/create",
+        type: "POST",
+        data: {id: $('#Comment_btn_id').val()},
+        dataType: ""
+      });
+    });
+</script>
+
+
+success: function(data) {
+          alert('successfully');
+        }
+  -->

@@ -1,5 +1,4 @@
 module UserMethods
-  extend ActiveSupport::Concern
 
   def name
     name = (self.firstname.capitalize + " " + self.lastname.capitalize)
@@ -27,6 +26,10 @@ module UserMethods
       return true,like_id 
     end
     return false    
+  end
+
+  def requests_ids(user)
+    FriendRequest.where(req_received_id: user.id).pluck(:user_id)
   end
 
 end

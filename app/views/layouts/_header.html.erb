@@ -39,7 +39,7 @@
         <% end %>
 
         <li class="nav-item nav-link">
-          <%= ("@" + current_user.firstname.capitalize) if user_signed_in?%>
+          <%= full_name(current_user) if user_signed_in?%>
         </li>
       
       </ul>
