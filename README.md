@@ -1,7 +1,7 @@
 # README
 
-Ruby v-2.5.2
-Rails v-5.2.6
+Ruby v-2.7.2
+Rails v-6.1.3
 
 A basic social media website where user can create an account and make friends.
 
@@ -24,3 +24,4 @@ Add like section to each posts.
 aslo add comment section with like option on comments too.
 Add bootstrap to demo app.
 
+https://rails-friendapp.herokuapp.com/
