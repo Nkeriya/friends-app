@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.2'
+ruby '2.7.2'
 
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.6'
-# Use sqlite3 as the database for Active Record
-
+gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
+# Use postgress as the database for Active Record
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -49,12 +49,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'sqlite3'
   gem "letter_opener"
-end
-
-group :production do
-  gem 'pg', '~> 1.2', '>= 1.2.3'
+  gem 'pry'
 end
 
 group :test do
