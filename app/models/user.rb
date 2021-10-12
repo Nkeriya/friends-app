@@ -17,10 +17,10 @@ class User < ApplicationRecord
   has_many :friend_requests, dependent: :destroy
   has_many :req_received, through: :friend_requests
 
-  has_many :posts
-  has_many :comments
-  has_many :post_likes
-  has_many :comment_likes 
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :post_likes, dependent: :destroy
+  has_many :comment_likes, dependent: :destroy
 
   GENDER = ["Male", "Female", "Other"]
   validates :gender, inclusion: GENDER
@@ -29,5 +29,4 @@ class User < ApplicationRecord
 
   scope :search_user, -> (search) {where("lower(firstname) LIKE :search OR lower(lastname) LIKE :search OR lower(username) LIKE :search", search: "%#{search.downcase}%")}
   scope :registered_users, -> (id) {all.where.not(id: id)} 
-
 end

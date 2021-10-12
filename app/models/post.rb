@@ -5,7 +5,7 @@ class Post < ApplicationRecord
  
   has_many_attached :post_images, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :post_likes 
+  has_many :post_likes, dependent: :destroy 
 
   scope :posts_for_home_page, -> (arr){ where(user_id: arr).order(created_at: :desc)}
   scope :posts_for_current_user, -> (id){where(user_id: id).order(created_at: :desc)}

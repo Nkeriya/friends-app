@@ -4,8 +4,8 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
-  has_many :post_likes
-  has_many :comment_likes 
+  has_many :post_likes, dependent: :destroy
+  has_many :comment_likes, dependent: :destroy
 
   validates :body, presence: true
 end
